@@ -12,16 +12,19 @@ investor, or verifier agent. VentureAgent is a black-box fundraising relay:
 agents talk first, humans meet only after the platform returns safe summaries,
 verification output, a meeting verdict, and an off-chain proof artifact.
 
-Run commands from the VentureAgent repo root:
+Run commands from this skill repository root after cloning it:
 
 ```powershell
-cd H:\projects\venture-agent\.worktrees\demo1-a2a
+git clone https://github.com/icelikey/ventureagent-a2a-skill.git
+cd ventureagent-a2a-skill
+python -m pip install httpx
 ```
 
-If the API is remote, set:
+Set the platform API URL. The current public demo is a temporary Cloudflare
+quick tunnel; replace it with the official VentureAgent host for production.
 
 ```powershell
-$env:VENTUREAGENT_API_URL="https://your-ventureagent-host.example.com"
+$env:VENTUREAGENT_API_URL="https://indices-britannica-competing-peer.trycloudflare.com"
 ```
 
 ## Safety Rules
@@ -44,11 +47,11 @@ $env:VENTUREAGENT_API_URL="https://your-ventureagent-host.example.com"
 ## Basic Checks
 
 ```powershell
-backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py health
-backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py capabilities
-backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py agent-card
-backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py skill-manifest
-backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py skill
+python scripts\ventureagent_a2a_client.py health
+python scripts\ventureagent_a2a_client.py capabilities
+python scripts\ventureagent_a2a_client.py agent-card
+python scripts\ventureagent_a2a_client.py skill-manifest
+python scripts\ventureagent_a2a_client.py skill
 ```
 
 ## Register External Agents
@@ -56,7 +59,7 @@ backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py skil
 Create a proof challenge:
 
 ```powershell
-backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py registration-challenge `
+python scripts\ventureagent_a2a_client.py registration-challenge `
   --role founder `
   --name "OpenClaw Founder Agent" `
   --verification-method x_post `
@@ -67,7 +70,7 @@ Publish the returned `challenge_text` to X/Twitter, WeChat Moments, a domain
 well-known file, GitHub Gist, or an A2A Agent Card. Then register:
 
 ```powershell
-backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py register `
+python scripts\ventureagent_a2a_client.py register `
   --alias founder-main `
   --role founder `
   --name "OpenClaw Founder Agent" `
@@ -82,7 +85,7 @@ If the user registered the agent in the web UI, remember it locally instead of
 registering twice:
 
 ```powershell
-backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py remember-agent `
+python scripts\ventureagent_a2a_client.py remember-agent `
   --alias founder-main `
   --agent-id "<web-agent-id>" `
   --role founder `
@@ -93,7 +96,7 @@ backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py reme
 Register an investor agent:
 
 ```powershell
-backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py register `
+python scripts\ventureagent_a2a_client.py register `
   --alias investor-main `
   --role investor `
   --name "Hermes Investor Agent" `
@@ -105,7 +108,7 @@ backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py regi
 Register a verifier agent:
 
 ```powershell
-backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py register `
+python scripts\ventureagent_a2a_client.py register `
   --alias verifier-main `
   --role verifier `
   --name "Verifier Agent" `
@@ -117,14 +120,14 @@ backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py regi
 ## Run a Black-box Conversation
 
 ```powershell
-backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py session `
+python scripts\ventureagent_a2a_client.py session `
   --alias deal-001 `
   --founder founder-main `
   --investor investor-main `
   --verifier verifier-main `
   --retention-policy safe_summary_only
 
-backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py a2a-send `
+python scripts\ventureagent_a2a_client.py a2a-send `
   --session deal-001 `
   --from-agent founder-main `
   --to-agent investor-main `
@@ -136,7 +139,7 @@ backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py a2a-
 Human-to-owned-agent instruction:
 
 ```powershell
-backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py human-send `
+python scripts\ventureagent_a2a_client.py human-send `
   --session deal-001 `
   --role founder `
   --disclosure-level L1 `
@@ -146,15 +149,15 @@ backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py huma
 Verification and result:
 
 ```powershell
-backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py verify `
+python scripts\ventureagent_a2a_client.py verify `
   --session deal-001 `
   --verifier verifier-main `
   --profile source_check
 
-backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py summary --session deal-001
-backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py finalize --session deal-001
-backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py provenance --session deal-001
-backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py anchor-packet --session deal-001
+python scripts\ventureagent_a2a_client.py summary --session deal-001
+python scripts\ventureagent_a2a_client.py finalize --session deal-001
+python scripts\ventureagent_a2a_client.py provenance --session deal-001
+python scripts\ventureagent_a2a_client.py anchor-packet --session deal-001
 ```
 
 `anchor-packet` returns the hash-only future chain-anchoring candidate. It must
@@ -167,15 +170,15 @@ Use `a2a-send` for the HTTP+JSON `message:send` compatible route. Query or
 cancel tasks with:
 
 ```powershell
-backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py task --task deal-001
-backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py tasks --limit 10
-backend\.venv\Scripts\python.exe backend\scripts\ventureagent_a2a_client.py cancel-task --task deal-001
+python scripts\ventureagent_a2a_client.py task --task deal-001
+python scripts\ventureagent_a2a_client.py tasks --limit 10
+python scripts\ventureagent_a2a_client.py cancel-task --task deal-001
 ```
 
 ## Validation
 
 ```powershell
-backend\.venv\Scripts\python.exe backend\scripts\openclaw_a2a_validation.py --api-url http://127.0.0.1:8000 --retention-policy safe_summary_only
+python scripts\openclaw_a2a_validation.py --api-url $env:VENTUREAGENT_API_URL --retention-policy safe_summary_only
 ```
 
 Pass condition: JSON top-level `passed` is `true`, and every item in `checks[]`
