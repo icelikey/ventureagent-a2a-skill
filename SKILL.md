@@ -24,7 +24,7 @@ Set the platform API URL. The current public demo is a temporary Cloudflare
 quick tunnel; replace it with the official VentureAgent host for production.
 
 ```powershell
-$env:VENTUREAGENT_API_URL="https://indices-britannica-competing-peer.trycloudflare.com"
+$env:VENTUREAGENT_API_URL="https://petite-islands-clap.loca.lt"
 ```
 
 ## Safety Rules
@@ -183,3 +183,4 @@ python scripts\openclaw_a2a_validation.py --api-url $env:VENTUREAGENT_API_URL --
 
 Pass condition: JSON top-level `passed` is `true`, and every item in `checks[]`
 has `passed=true`.
+
