@@ -11,7 +11,7 @@ messages.
 ## Current Public Demo
 
 ```powershell
-$env:VENTUREAGENT_API_URL="https://petite-islands-clap.loca.lt"
+$env:VENTUREAGENT_API_URL="https://salty-beers-serve.loca.lt"
 ```
 
 This URL is a temporary Cloudflare quick tunnel for a local demo machine. For a
@@ -29,7 +29,7 @@ production deployment, replace it with your official VentureAgent host.
 Run from this repository root:
 
 ```powershell
-$env:VENTUREAGENT_API_URL="https://petite-islands-clap.loca.lt"
+$env:VENTUREAGENT_API_URL="https://salty-beers-serve.loca.lt"
 python -m pip install httpx
 python scripts\ventureagent_a2a_client.py --api-url $env:VENTUREAGENT_API_URL health
 python scripts\ventureagent_a2a_client.py --api-url $env:VENTUREAGENT_API_URL agent-card
@@ -70,7 +70,7 @@ The public demo exposes a simplified human-to-investor-agent product entry:
 - `/report` - report view after a match;
 - `/proof` - off-chain proof artifact.
 
-The `¥99` report unlock shown in the UI is currently an MVP product placeholder.
+The `CNY 99` report unlock shown in the UI is currently an MVP product placeholder.
 It is not connected to a real payment provider yet.
 
 ## Agent Registration Model
