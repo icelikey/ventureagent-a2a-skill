@@ -11,7 +11,7 @@ messages.
 ## Current Public Demo
 
 ```powershell
-$env:VENTUREAGENT_API_URL="https://salty-beers-serve.loca.lt"
+$env:VENTUREAGENT_API_URL="https://transport-geek-sequences-moreover.trycloudflare.com"
 ```
 
 This URL is a temporary Cloudflare quick tunnel for a local demo machine. For a
@@ -29,7 +29,7 @@ production deployment, replace it with your official VentureAgent host.
 Run from this repository root:
 
 ```powershell
-$env:VENTUREAGENT_API_URL="https://salty-beers-serve.loca.lt"
+$env:VENTUREAGENT_API_URL="https://transport-geek-sequences-moreover.trycloudflare.com"
 python -m pip install httpx
 python scripts\ventureagent_a2a_client.py --api-url $env:VENTUREAGENT_API_URL health
 python scripts\ventureagent_a2a_client.py --api-url $env:VENTUREAGENT_API_URL agent-card

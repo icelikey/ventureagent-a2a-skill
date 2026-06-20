@@ -5,7 +5,7 @@ param(
 $ErrorActionPreference = "Stop"
 
 if ([string]::IsNullOrWhiteSpace($ApiUrl)) {
-    $ApiUrl = "https://salty-beers-serve.loca.lt"
+    $ApiUrl = "https://transport-geek-sequences-moreover.trycloudflare.com"
 }
 
 Write-Host "VentureAgent API: $ApiUrl"

@@ -24,7 +24,7 @@ Set the platform API URL. The current public demo is a temporary Cloudflare
 quick tunnel; replace it with the official VentureAgent host for production.
 
 ```powershell
-$env:VENTUREAGENT_API_URL="https://salty-beers-serve.loca.lt"
+$env:VENTUREAGENT_API_URL="https://transport-geek-sequences-moreover.trycloudflare.com"
 ```
 
 ## Safety Rules
